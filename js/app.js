@@ -21,15 +21,23 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
 
     // Timer and comments panel
     $scope.timer = 60;
-    $scope.paused = false;
+    $scope.paused = true;
+    $scope.status = "Start";
 
-    $scope.startTimer = function() {
-        $scope.paused = false;
-        $timeout(updateTimer, 1000);
+    $scope.toggleTimer = function() {
+        $scope.paused = !$scope.paused;
+        if($scope.status === "Start") {
+            $scope.status = "Stop";
+            $timeout(updateTimer, 1000);
+        } else {
+            $scope.status = "Start";
+        }
     }
 
-    $scope.pauseTimer = function() {
+    $scope.resetTimer = function() {
         $scope.paused = true;
+        $scope.status = "Start";
+        $scope.timer = 60;
     }
 
     $scope.getProgress = function() {
@@ -42,7 +50,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
             $scope.timer--;
             $timeout(updateTimer, 1000);
         } else if($scope.timer === 0) {
-            $scope.timer = 60;
+            $scope.resetTimer();
         }
     }  
 }]);
