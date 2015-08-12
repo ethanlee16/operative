@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Operative</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  </head>
+  <body ng-app="Operative">
+    <div class="container-fluid" ng-controller="MainCtrl">
+      <!-- see mockup: http://cl.ly/image/3N3y1g0q3d2h --> 
+      <div class="col-md-2">
+        <!-- conference info and current time -->
+        <h1>{{confName}}</h1>
+        <h2>{{committeeName}}</h2>
+        <h2>{{time | date:'h:mm:ss a'}}</h2>
+      </div>
+      <div class="col-md-8">
+        <!-- speakers' list and editor -->
+        <h1>Speakers</h1>
+        <ul>
+          <li ng-repeat="speaker in speakers">
+            <img ng-src="{{speaker.flag}}">
+            {{speaker.name}}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <!-- timer and comments -->
+        <h1>Current</h1>
+        <h2>{{timer | timer}}</h2>
+        <button ng-click="startTimer()">Start Timer</button>
+        <button ng-click="pauseTimer()">Pause Timer</button>
+      </div>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular-1.4.3.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
+
