@@ -32,6 +32,10 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
         $scope.paused = true;
     }
 
+    $scope.getProgress = function() {
+        return ((60 - $scope.timer) / 60) * 100;
+    }
+
     var updateTimer = function () {
         if($scope.timer > 0 && !$scope.paused) {
             console.log($scope.paused);

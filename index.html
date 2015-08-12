@@ -27,6 +27,11 @@
         <!-- timer and comments -->
         <h1>Current</h1>
         <h2>{{timer | timer}}</h2>
+        <div class="progress">
+        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{getProgress()}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : (getProgress() + '%') }">
+          <span class="sr-only">{{getProgress()}}% Complete</span>
+        </div>
+        </div>
         <button ng-click="startTimer()">Start Timer</button>
         <button ng-click="pauseTimer()">Pause Timer</button>
       </div>
