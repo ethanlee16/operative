@@ -20,12 +20,12 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
     });
 
     // Timer and comments panel
-    $scope.timer = 6000;
+    $scope.timer = 60;
     $scope.paused = false;
 
     $scope.startTimer = function() {
         $scope.paused = false;
-        $timeout(updateTimer, 10);
+        $timeout(updateTimer, 1000);
     }
 
     $scope.pauseTimer = function() {
@@ -36,9 +36,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
         if($scope.timer > 0 && !$scope.paused) {
             console.log($scope.paused);
             $scope.timer--;
-            $timeout(updateTimer, 10);
+            $timeout(updateTimer, 1000);
         } else if($scope.timer === 0) {
-            $scope.timer = 6000;
+            $scope.timer = 60;
         }
     }  
 }]);
@@ -47,18 +47,13 @@ app.filter('timer', function() {
     return function(input) {
         var time = input;
         var min = 0, sec = 0, mill = 0;
-        while(time / 6000 >= 1) {
+        while(time / 60 >= 1) {
             min++;
-            time -= 6000;
+            time -= 60;
         }
-        while(time / 100 >= 1) {
-            sec++;
-            time -= 100;
-        }
-        mill = time;
-        millString = ('00' + mill).substr(-2);
+        sec = time;
         secString = ('00' + sec).substr(-2);
         
-        return min + ":" + secString + " " + millString
+        return min + ":" + secString;
     }
 });
