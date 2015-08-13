@@ -1,4 +1,4 @@
-var app = angular.module('Operative', []);
+var app = angular.module('Operative', ['ui.bootstrap']);
 
 app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
 
@@ -29,9 +29,8 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
     });
 
     $scope.addCountry = function() {
-        
         var selectedCountry = $scope.countries.filter(function(country) {
-            return country.name === $scope.newCountry;
+            return country.name.toLowerCase() === $scope.newCountry.name.toLowerCase();
         });
         selectedCountry = selectedCountry[0];
         console.log(selectedCountry);
@@ -42,8 +41,14 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
         $scope.newCountry = "";
     }
 
+    $scope.removeCountry = function(i) {
+        $scope.speakers.splice(i, 1);
+    }
+
     // Timer and comments panel
-    $scope.timer = 60;
+
+    $scope.speakingTime = 10;
+    $scope.timer = $scope.speakingTime;
     $scope.paused = true;
     $scope.status = "Start";
 
@@ -60,11 +65,11 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
     $scope.resetTimer = function() {
         $scope.paused = true;
         $scope.status = "Start";
-        $scope.timer = 60;
+        $scope.timer = $scope.speakingTime;
     }
 
     $scope.getProgress = function() {
-        return ((60 - $scope.timer) / 60) * 100;
+        return (($scope.speakingTime - $scope.timer) / $scope.speakingTime) * 100;
     }
 
     var updateTimer = function () {
@@ -73,6 +78,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
             $scope.timer--;
             $timeout(updateTimer, 1000);
         } else if($scope.timer === 0) {
+            $scope.removeCountry(0);
             $scope.resetTimer();
         }
     }  
