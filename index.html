@@ -18,7 +18,8 @@
         <!-- speakers' list and editor -->
         <h1>Speakers</h1>
         <form ng-submit="addCountry()">
-          <input type="text" ng-model="newCountry" typeahead="country as country.name for country in countries | filter:{name:$viewValue} | limitTo:5" placeholder="Type country name"><input type="submit" typeahead-editable="false" value="Add Speaker">
+          <input type="text" ng-model="newCountry" typeahead="country as country.name for country in countries | filter:{name:$viewValue} | limitTo:5" placeholder="Type country name">
+          <input type="submit" value="Add Speaker">
         </form>
         <ul>
           <li ng-repeat="speaker in speakers">
@@ -40,6 +41,13 @@
         </div>
         <button ng-click="toggleTimer()">{{status}} Timer</button>
         <button ng-click="resetTimer()">Reset Timer</button>
+        <hr>
+        <form ng-submit="setTime()">
+          <input type="text" ng-model="minutesTime" style="width: 30px" placeholder="M">
+          <span> : </span>
+          <input type="text" ng-model="secondsTime" style="width: 30px" placeholder="SS">
+          <input type="submit" value="Set speaking time">
+        </form>
       </div>
     </div>
     <script src="js/lib/jquery-1.11.3.js"></script>

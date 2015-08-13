@@ -47,10 +47,15 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
 
     // Timer and comments panel
 
-    $scope.speakingTime = 10;
+    $scope.speakingTime = 60;
     $scope.timer = $scope.speakingTime;
     $scope.paused = true;
     $scope.status = "Start";
+
+    $scope.setTime = function() {
+        $scope.speakingTime = (Number($scope.minutesTime) * 60) + Number($scope.secondsTime);
+        $scope.timer = $scope.speakingTime;
+    }
 
     $scope.toggleTimer = function() {
         $scope.paused = !$scope.paused;
