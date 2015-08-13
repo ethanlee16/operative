@@ -15,9 +15,32 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
     $timeout(updateTime, 1000);
     
     // Speakers panel
+    /*
     $http.get('tests/countries.json').success(function(data) {
         $scope.speakers = data;
     });
+    */
+
+    $scope.speakers = [];
+
+    $http.get('js/countries-list.json').success(function(data) {
+        $scope.countries = data;
+
+    });
+
+    $scope.addCountry = function() {
+        
+        var selectedCountry = $scope.countries.filter(function(country) {
+            return country.name === $scope.newCountry;
+        });
+        selectedCountry = selectedCountry[0];
+        console.log(selectedCountry);
+        $scope.speakers.push({
+            "name": selectedCountry.name,
+            "img": "img/flags/" + selectedCountry['alpha-2'].toLowerCase() + ".png"
+        });
+        $scope.newCountry = "";
+    }
 
     // Timer and comments panel
     $scope.timer = 60;
