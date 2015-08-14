@@ -15,12 +15,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
     $timeout(updateTime, 1000);
     
     // Speakers panel
-    /*
-    $http.get('tests/countries.json').success(function(data) {
-        $scope.speakers = data;
-    });
-    */
-
     $scope.speakers = [];
 
     $http.get('js/countries-list.json').success(function(data) {
