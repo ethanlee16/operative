@@ -41,6 +41,10 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
         $scope.newCountry = "";
     }
 
+    $scope.startsWith = function(state, viewValue) {
+      return state.substr(0, viewValue.length).toLowerCase() == viewValue.toLowerCase();
+    } 
+
     $scope.removeCountry = function(i) {
         $scope.speakers.splice(i, 1);
     }
@@ -53,6 +57,8 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
     $scope.status = "Start";
 
     $scope.setTime = function() {
+        $scope.minutesTime = $scope.minutesTime || 0;
+        $scope.secondsTime = $scope.secondsTime || 0;
         $scope.speakingTime = (Number($scope.minutesTime) * 60) + Number($scope.secondsTime);
         $scope.timer = $scope.speakingTime;
     }
